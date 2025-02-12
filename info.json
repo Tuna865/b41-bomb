@@ -1,0 +1,9 @@
+{
+    "name": "b41-bomb",
+    "version": "0.5.0",
+    "title": "B41 Thermonuclear Bomb",
+    "author": "TunaSteak",
+    "factorio_version": "2.0",
+    "dependencies": ["base >= 2.0"],
+    "description": "Adds an upgrade to the base game Atomic Bomb\n\n\nFor those curious: https://en.wikipedia.org/wiki/B41_nuclear_bomb"
+  }
