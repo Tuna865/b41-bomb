@@ -3,6 +3,6 @@
 @echo off
 @REM python ".\mod-updater.py" --factoriodir="%appdata%/Factorio"
 python ".\mod-updater.py" 
-echo mod updated; zip folder placed in C:/Development/Modding
+echo mod updated; zip folder placed in C:/Development/Modding/b41-bomb
 echo
 PAUSE

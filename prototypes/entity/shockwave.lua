@@ -1,7 +1,7 @@
 -- contains parameters for the damage from the shockwave projectiles  
 
 local max_nuke_shockwave_movement_distance_deviation = 2
-local max_nuke_shockwave_movement_distance = 20 + max_nuke_shockwave_movement_distance_deviation / 8
+local max_nuke_shockwave_movement_distance = 30 + max_nuke_shockwave_movement_distance_deviation / 6
 
 
 data.extend({
@@ -141,7 +141,7 @@ data.extend({
         {
           {
             type = "area",
-            radius = 3,
+            radius = 6,
             ignore_collision_condition = true,
             action_delivery =
             {
@@ -174,7 +174,7 @@ data.extend({
         {
           {
             type = "area",
-            radius = 3,
+            radius = 15,
             ignore_collision_condition = true,
             action_delivery =
             {
@@ -187,7 +187,7 @@ data.extend({
                 upper_distance_threshold = 35,
                 lower_damage_modifier = 1,
                 upper_damage_modifier = 0.01,
-                damage = {amount = 100, type = "explosion"}
+                damage = {amount = 500, type = "explosion"}
               }
             }
           }

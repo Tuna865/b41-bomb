@@ -13,7 +13,7 @@ data.extend({
           {
             {
               size = 64,
-              filename = "__base__/graphics/icons/atomic-bomb.png",
+              filename = "__base__/graphics/icons/atomic-bomb-light.png",
               scale = 0.5,
               mipmap_count = 4
             },
@@ -52,7 +52,8 @@ data.extend({
         inventory_move_sound = item_sounds.atomic_bomb_inventory_move,
         pick_sound = item_sounds.atomic_bomb_inventory_pickup,
         drop_sound = item_sounds.atomic_bomb_inventory_move,
-        stack_size = 1,
+        -- stack_size = 1,  -- this is the intended stack size
+        stack_size = 50,    -- this is for testing
         weight = 3 * tons
       }
 })

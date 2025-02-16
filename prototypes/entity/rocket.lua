@@ -31,7 +31,7 @@ data:extend({
             },
             {
               type = "destroy-cliffs",
-              radius = 20,
+              radius = 30,
               explosion_at_trigger = "explosion"
             },
             {
@@ -44,9 +44,9 @@ data:extend({
               ease_in_duration = 10,
               ease_out_duration = 90,
               delay = 0,
-              strength = 8,
-              full_strength_max_distance = 400,
-              max_distance = 1000
+              strength = 15,
+              full_strength_max_distance = 1000,
+              max_distance = 2000
             },
             {
               type = "play-sound",
@@ -68,14 +68,18 @@ data:extend({
             },
             {
               type = "damage",
-              damage = {amount = 12000, type = "explosion"}
+              damage = {amount = 12000, type = "explosion"},
             },
             {
-              type = "create-entity",
-              entity_name = "huge-scorchmark",
-              offsets = {{ 0, -0.5 }},
-              check_buildability = true
+              type = "damage",
+              damage = {amount = 8000, type = "physical"},
             },
+            -- {
+            --   type = "create-entity",
+            --   entity_name = "huge-scorchmark",
+            --   offsets = {{ 0, -0.5 }},
+            --   check_buildability = true
+            -- },
             {
               type = "invoke-tile-trigger",
               repeat_count = 1
@@ -86,18 +90,18 @@ data:extend({
               include_decals = true,
               invoke_decorative_trigger = true,
               decoratives_with_trigger_only = false, -- if true, destroys only decoratives that have trigger_effect set
-              radius = 20 -- large radius for demostrative purposes
+              radius = 30 -- large radius for demostrative purposes
             },
-            {
-              type = "create-decorative",
-              decorative = "nuclear-ground-patch",
-              spawn_min_radius = 14.5,
-              spawn_max_radius = 16.5,
-              spawn_min = 40,
-              spawn_max = 50,
-              apply_projection = true,
-              spread_evenly = true
-            },
+            -- {      -- commenting this out bc it looks ugly 
+            --   type = "create-decorative",
+            --   decorative = "nuclear-ground-patch",
+            --   spawn_min_radius = 14.5,
+            --   spawn_max_radius = 16.5,
+            --   spawn_min = 40,
+            --   spawn_max = 50,
+            --   apply_projection = true,
+            --   spread_evenly = true
+            -- },
             {
               type = "nested-result",
               action =
@@ -162,7 +166,7 @@ data:extend({
                 target_entities = false,
                 trigger_from_target = true,
                 repeat_count = 900,
-                radius = 6,
+                radius = 12,
                 action_delivery =
                 {
                   type = "projectile",
@@ -181,7 +185,7 @@ data:extend({
                 target_entities = false,
                 trigger_from_target = true,
                 repeat_count = 1000,
-                radius = 10,
+                radius = 20,
                 action_delivery =
                 {
                   type = "projectile",
