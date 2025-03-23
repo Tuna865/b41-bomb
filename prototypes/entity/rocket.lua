@@ -25,7 +25,7 @@ data:extend({
             {
               type = "set-tile",
               tile_name = "nuclear-ground",
-              radius = 25,
+              radius = 5,
               apply_projection = true,
               tile_collision_mask = { layers={water_tile=true} }
             },
