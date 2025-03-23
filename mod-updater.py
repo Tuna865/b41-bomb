@@ -1,38 +1,58 @@
-# little scrippy to zip up this mod since Factorio wants a zip  
-# speeds up in game testing by a lot 
-import json, os, shutil
-
-# TODO: update the version in the json.info after it makes the zip
-#       place the zip in the factorio directory so the batch file can do it all with 1 click 
-#       zip the folder instead of just the files (zip/folder/files)
+import json, os, sys, getopt
+from zipfile import ZipFile
 
 # open the info.json in this mod and get the name & version from it 
-def getModVersion() -> str:
-    global modVersion
+def getModInfo() -> str:
+    global modVersion, modName
     with open("info.json") as file:
         modInfo = json.loads(file.read())
     modVersion = modInfo["version"]
-    return modVersion
+    modName = modInfo["name"]
+    file.close()
+    return modVersion, modName
+getModInfo()
 
-getModVersion()
+# need to update info.json before this will work so I'll just manually increment version for now
+
+# def updateVersion() -> str:
+#     newVersion = int(modVersion[-1]) + 1
+#     global updatedVersion
+#     updatedVersion = modVersion.replace(modVersion[-1], str(newVersion))
+#     # print(f"\n\t{updatedVersion}")
+#     return updatedVersion
+# updateVersion()   
+
+zipName = f"{modName}_{modVersion}.zip"
+modPath = os.getcwd()
+
+def zipMod(zip_file_path, root_dir):
+    with ZipFile(zip_file_path, 'w') as zip:
+        for root, _, files in os.walk(root_dir):
+            for file in files:
+                file_path = os.path.join(root, file)
+                archive_path = os.path.relpath(file_path, root_dir)
+                zip.write(file_path, os.path.join(os.path.basename(root_dir), archive_path))
+
+zipMod(zipName, modPath)
 
 
-def updateVersion() -> str:
-    newVersion = int(modVersion[-1]) + 1
-    global updatedVersion
-    updatedVersion = modVersion.replace(modVersion[-1], str(newVersion))
-    return updatedVersion
-
-updateVersion()   
+# TODO: update the version in info.json after creating the zip
+#       place the zip in the Factorio directory instead of here
 
 
-# get the name of the current folder from the file path and use the parent directory as the output for the zip 
-def zipMod(folderPath):
-    parentDir, currentFolder = os.path.split(folderPath)
-    zipFileName = currentFolder + f"_{updatedVersion}"
-    zipFilePath = os.path.join(parentDir, zipFileName)
+# if not os.path.exists(zipName):
+#     print("creating mod")
+#     zipMod(zipName, modPath)
+# else:
+#     # need logic here to move or copy the zip to the Factorio mods folder 
+#     print("mod already exists; zip folder placed in Factorio mods folder (work in progress; not yet)")
 
-    shutil.make_archive(zipFilePath, 'zip', folderPath)
-
-# call zipMod() in the folder where this python script is 
-zipMod(os.getcwd())
+# adds the ability for the batch file to put the zip in Factorio's mod directory
+"""
+if __name__ == "__main__":
+  factorioFolderDir = None
+  opts, args = getopt.getopt(sys.argv[1:], ":m:", ['factoriodir='])
+  for opt, arg in opts:
+    if opt in ('-m', '--factoriodir'):
+      factorioFolderDir = os.path.realpath(arg.strip())
+"""
